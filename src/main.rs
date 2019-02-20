@@ -1,9 +1,46 @@
 use std::fmt;
 
-enum Node<'a, T> {
-    Data(T, &'a Self),
-    Empty
+trait NodeList : Sized {
+    type Data: Sized;
+    fn get(self) -> Option<(Self::Data, Self)>;
 }
+
+/*
+struct RefList<T> {
+    
+}
+*/
+
+impl<'t, T> NodeList for Option<(T, &'t Self)> {
+    type Data = T;
+    fn get(self) {
+
+    }
+}
+
+// trait NodeTrait<T> : Sized {
+//     fn get_data() -> T;
+//     fn get_next() -> Option<Self>;
+// }
+
+// struct Node<'a, T> {
+//     data: T,
+//     next: MyList<'a, T>
+// }
+
+// type MyList<'a, T> = Option<&'a Node<'a, T>>;
+
+// struct Node2<T> {
+//     data: T,
+//     next: MyList2<T>
+// }
+
+// type MyList2<T> = Option<Box<Node2<T>>>;
+
+// enum Node<'a, T> {
+//     Data(T, &'a Self),
+//     Empty
+// }
 
 impl<'a, T: fmt::Display> fmt::Display for Node<'a, T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
